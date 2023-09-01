@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -28,16 +30,23 @@ function Copyright(props) {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
+
 const defaultTheme = createTheme();
 
 export default function AuthPage() {
+
+const [email, setEmail] = useState()
+const [password, setPassword] = useState()
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    axios.post('/api/',{email, password})
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
   };
 
   return (
@@ -67,6 +76,7 @@ export default function AuthPage() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              onChange={(e)=> setEmail(e.target.value)}
               autoFocus
             />
             <TextField
@@ -78,6 +88,7 @@ export default function AuthPage() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e)=> setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
