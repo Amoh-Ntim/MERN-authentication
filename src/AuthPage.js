@@ -39,7 +39,7 @@ const [email, setEmail] = useState()
 const [password, setPassword] = useState()
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('/api/',{email, password})
+    axios.post('http://localhost:3001/AuthPage',{email, password})
     .then(response => console.log(response))
     .catch(error => console.log(error))
     // const data = new FormData(event.currentTarget);
@@ -75,6 +75,7 @@ const [password, setPassword] = useState()
               id="email"
               label="Email Address"
               name="email"
+              value={email}
               autoComplete="email"
               onChange={(e)=> setEmail(e.target.value)}
               autoFocus
@@ -87,6 +88,7 @@ const [password, setPassword] = useState()
               label="Password"
               type="password"
               id="password"
+              value={password}
               autoComplete="current-password"
               onChange={(e)=> setPassword(e.target.value)}
             />
