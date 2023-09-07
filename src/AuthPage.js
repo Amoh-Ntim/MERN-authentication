@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import { useNavigate} from 'react-router-dom'
 
 function Copyright(props) {
   return (
@@ -37,16 +38,13 @@ export default function AuthPage() {
 
 const [email, setEmail] = useState()
 const [password, setPassword] = useState()
+const  navigate = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post('http://localhost:3001/AuthPage',{email, password})
     .then(response => console.log(response))
     .catch(error => console.log(error))
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // });
+    navigate('/Home')
   };
 
   return (
