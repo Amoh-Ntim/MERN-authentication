@@ -15,5 +15,5 @@ app.post('/AuthPage', (req,res) => {
    .catch(err => res.json(err))
 })
 app.listen(3001, () => {
-    console.log("server is running")
+    console.log("server is up and running")
 })
